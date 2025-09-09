@@ -3,7 +3,319 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./assets/style.css" />
     <title>Document</title>
   </head>
-  <body></body>
+  <body>
+    <header>
+      <div class="header-content">
+        <div class="logo">LEVEL UP</div>
+        <div class="nav-buttons">
+          <a href="../Inicio-sesion/inicio-sesion.html" class="btn btn-primary"
+            >Iniciar Sesión</a
+          >
+          <a href="../Registro/registro.html" class="btn btn-secondary"
+            >Registrarse</a
+          >
+        </div>
+      </div>
+    </header>
+
+    <div class="main-container">
+      <section class="hero-section">
+        <h1 class="hero-title">¡Sube de Nivel!</h1>
+        <p class="hero-subtitle">
+          Descubre los mejores productos gaming y lleva tu experiencia al
+          siguiente nivel
+        </p>
+      </section>
+
+      <div class="catalogo">
+        <!-- Filtros -->
+        <aside class="filtros">
+          <h3>🎮 Categorías</h3>
+          <ul>
+            <li>
+              <input type="checkbox" id="juegos" value="juegos" /><label
+                for="juegos"
+                >Juegos de mesa</label
+              >
+            </li>
+            <li>
+              <input type="checkbox" id="accesorios" value="accesorios" /><label
+                for="accesorios"
+                >Accesorios</label
+              >
+            </li>
+            <li>
+              <input type="checkbox" id="consolas" value="consolas" /><label
+                for="consolas"
+                >Consolas</label
+              >
+            </li>
+            <li>
+              <input
+                type="checkbox"
+                id="computadores"
+                value="computadores"
+              /><label for="computadores">PC Gamers</label>
+            </li>
+            <li>
+              <input type="checkbox" id="sillas" value="sillas" /><label
+                for="sillas"
+                >Sillas Gaming</label
+              >
+            </li>
+            <li>
+              <input type="checkbox" id="mouse" value="mouse" /><label
+                for="mouse"
+                >Mouse Gaming</label
+              >
+            </li>
+            <li>
+              <input type="checkbox" id="mousepad" value="mousepad" /><label
+                for="mousepad"
+                >Mousepads</label
+              >
+            </li>
+            <li>
+              <input type="checkbox" id="poleras" value="poleras" /><label
+                for="poleras"
+                >Poleras Gaming</label
+              >
+            </li>
+            <li>
+              <input type="checkbox" id="polerones" value="polerones" /><label
+                for="polerones"
+                >Polerones Gaming</label
+              >
+            </li>
+            <li>
+              <input type="checkbox" id="tecnico" value="tecnico" /><label
+                for="tecnico"
+                >Servicio Técnico</label
+              >
+            </li>
+          </ul>
+
+          <h3>📊 Ordenar por</h3>
+          <select id="ordenar">
+            <option value="default">Más Populares</option>
+            <option value="precio-asc">Precio: Menor a Mayor</option>
+            <option value="precio-desc">Precio: Mayor a Menor</option>
+            <option value="nombre">Nombre A-Z</option>
+          </select>
+
+          <h3>🔍 Buscar</h3>
+          <input type="text" id="buscador" placeholder="Buscar producto..." />
+        </aside>
+
+        <!-- Productos -->
+        <section class="productos">
+          <div
+            class="producto"
+            data-categoria="consolas"
+            data-precio="450000"
+            data-nombre="PlayStation 5"
+          >
+            <img
+              src="/placeholder.svg?height=180&width=250"
+              alt="PlayStation 5"
+            />
+            <div class="categoria">Consolas</div>
+            <h4>PlayStation 5</h4>
+            <div class="precio">$450.000</div>
+            <button class="add-to-cart">Agregar al Carrito</button>
+          </div>
+
+          <div
+            class="producto"
+            data-categoria="mouse"
+            data-precio="85000"
+            data-nombre="Logitech G Pro X"
+          >
+            <img
+              src="/placeholder.svg?height=180&width=250"
+              alt="Mouse Gaming"
+            />
+            <div class="categoria">Mouse Gaming</div>
+            <h4>Logitech G Pro X</h4>
+            <div class="precio">$85.000</div>
+            <button class="add-to-cart">Agregar al Carrito</button>
+          </div>
+
+          <div
+            class="producto"
+            data-categoria="sillas"
+            data-precio="320000"
+            data-nombre="Silla Gaming Pro"
+          >
+            <img
+              src="/placeholder.svg?height=180&width=250"
+              alt="Silla Gaming"
+            />
+            <div class="categoria">Sillas Gaming</div>
+            <h4>Silla Gaming Pro</h4>
+            <div class="precio">$320.000</div>
+            <button class="add-to-cart">Agregar al Carrito</button>
+          </div>
+
+          <div
+            class="producto"
+            data-categoria="juegos"
+            data-precio="35000"
+            data-nombre="Catan Edición Especial"
+          >
+            <img src="/placeholder.svg?height=180&width=250" alt="Catan" />
+            <div class="categoria">Juegos de Mesa</div>
+            <h4>Catan Edición Especial</h4>
+            <div class="precio">$35.000</div>
+            <button class="add-to-cart">Agregar al Carrito</button>
+          </div>
+
+          <div
+            class="producto"
+            data-categoria="computadores"
+            data-precio="1200000"
+            data-nombre="PC Gaming RTX 4070"
+          >
+            <img src="/placeholder.svg?height=180&width=250" alt="PC Gaming" />
+            <div class="categoria">PC Gamers</div>
+            <h4>PC Gaming RTX 4070</h4>
+            <div class="precio">$1.200.000</div>
+            <button class="add-to-cart">Agregar al Carrito</button>
+          </div>
+
+          <div
+            class="producto"
+            data-categoria="mousepad"
+            data-precio="25000"
+            data-nombre="Mousepad RGB XL"
+          >
+            <img
+              src="/placeholder.svg?height=180&width=250"
+              alt="Mousepad RGB"
+            />
+            <div class="categoria">Mousepads</div>
+            <h4>Mousepad RGB XL</h4>
+            <div class="precio">$25.000</div>
+            <button class="add-to-cart">Agregar al Carrito</button>
+          </div>
+
+          <div
+            class="producto"
+            data-categoria="poleras"
+            data-precio="18000"
+            data-nombre="Polera Level Up"
+          >
+            <img
+              src="/placeholder.svg?height=180&width=250"
+              alt="Polera Gaming"
+            />
+            <div class="categoria">Poleras Gaming</div>
+            <h4>Polera Level Up</h4>
+            <div class="precio">$18.000</div>
+            <button class="add-to-cart">Agregar al Carrito</button>
+          </div>
+
+          <div
+            class="producto"
+            data-categoria="accesorios"
+            data-precio="65000"
+            data-nombre="Auriculares Gaming 7.1"
+          >
+            <img
+              src="/placeholder.svg?height=180&width=250"
+              alt="Auriculares Gaming"
+            />
+            <div class="categoria">Accesorios</div>
+            <h4>Auriculares Gaming 7.1</h4>
+            <div class="precio">$65.000</div>
+            <button class="add-to-cart">Agregar al Carrito</button>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script>
+      const checkboxes = document.querySelectorAll(
+        ".filtros input[type=checkbox]"
+      );
+      const productos = document.querySelectorAll(".producto");
+      const ordenar = document.getElementById("ordenar");
+      const buscador = document.getElementById("buscador");
+
+      // Filtrar productos por categoría
+      checkboxes.forEach((cb) => {
+        cb.addEventListener("change", filtrarProductos);
+      });
+
+      // Buscar productos por nombre
+      buscador.addEventListener("input", filtrarProductos);
+
+      // Ordenar productos
+      ordenar.addEventListener("change", () => {
+        const contenedor = document.querySelector(".productos");
+        const items = Array.from(contenedor.children);
+
+        items.sort((a, b) => {
+          switch (ordenar.value) {
+            case "precio-asc":
+              return parseInt(a.dataset.precio) - parseInt(b.dataset.precio);
+            case "precio-desc":
+              return parseInt(b.dataset.precio) - parseInt(a.dataset.precio);
+            case "nombre":
+              return a.dataset.nombre.localeCompare(b.dataset.nombre);
+            default:
+              return 0;
+          }
+        });
+
+        items.forEach((item) => contenedor.appendChild(item));
+      });
+
+      function filtrarProductos() {
+        const seleccionadas = Array.from(checkboxes)
+          .filter((c) => c.checked)
+          .map((c) => c.value);
+
+        const texto = buscador.value.toLowerCase();
+
+        productos.forEach((prod) => {
+          const categoria = prod.dataset.categoria;
+          const nombre = prod.dataset.nombre.toLowerCase();
+
+          const coincideCategoria =
+            seleccionadas.length === 0 || seleccionadas.includes(categoria);
+          const coincideTexto = nombre.includes(texto);
+
+          prod.style.display =
+            coincideCategoria && coincideTexto ? "block" : "none";
+        });
+      }
+
+      document.querySelectorAll(".add-to-cart").forEach((btn) => {
+        btn.addEventListener("click", function () {
+          const producto = this.closest(".producto");
+          const nombre = producto.dataset.nombre;
+
+          this.textContent = "¡Agregado!";
+          this.style.background = "#1E90FF";
+          this.style.color = "white";
+
+          setTimeout(() => {
+            this.textContent = "Agregar al Carrito";
+            this.style.background = "#39FF14";
+            this.style.color = "#000000";
+          }, 2000);
+        });
+      });
+    </script>
+  </body>
 </html>

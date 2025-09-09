@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../assets/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap"
+      rel="stylesheet"
+    />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1 class="titular">Gestión de Usuarios</h1>
+    <h3>Administra tu informacion personal y preferencia de compra</h3>
+
+    <div class="perfil-usuario">
+      <div class="info-perfil">
+        <img
+          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/attachments/gen-images/public/professional-woman-avatar-7trcFTykT3i8qO9R2s1IaS8p0LMsLt.png"
+          alt="Descripción de la imagen"
+        />
+        <div class="info-usuario">
+          <h1>Fabian Briones</h1>
+          <h3>fabian.briones@example.com</h3>
+          <div>
+            <p>Hardware</p>
+            <p>Aventura</p>
+            <p>RPG</p>
+          </div>
+        </div>
+      </div>
+      <button>Cambiar Foto</button>
+    </div>
+    <script>
+      function mostrarSeccion(id) {
+        // ocultar todos
+        document.querySelectorAll(".contenido").forEach((sec) => {
+          sec.classList.remove("activo");
+        });
+
+        // mostrar el que corresponde
+        document.getElementById(id).classList.add("activo");
+      }
+
+      // Mostrar la primera sección al cargar
+      document.addEventListener("DOMContentLoaded", () => {
+        mostrarSeccion("personal");
+      });
+    </script>
+
+    <script>
+      function mostrarSeccion(seccion) {
+        // ocultar todas las secciones
+        document.querySelectorAll(".contenido").forEach((div) => {
+          div.classList.remove("activo");
+        });
+
+        // mostrar la sección actual
+        document.getElementById(seccion).classList.add("activo");
+
+        // quitar "activo" a todos los enlaces
+        document.querySelectorAll(".menu-usuario a").forEach((a) => {
+          a.classList.remove("activo");
+        });
+
+        // marcar como activo el link clickeado
+        event.target.classList.add("activo");
+      }
+    </script>
+
+    <div class="menu-usuario">
+      <ul>
+        <li>
+          <a href="#" class="activo" onclick="mostrarSeccion('personal')"
+            >Personal</a
+          >
+        </li>
+        <li>
+          <a href="#" onclick="mostrarSeccion('compras')">Compras</a>
+        </li>
+        <li>
+          <a href="#" onclick="mostrarSeccion('preferencias')">Preferencias</a>
+        </li>
+        <li>
+          <a href="#" onclick="mostrarSeccion('seguridad')">Seguridad</a>
+        </li>
+      </ul>
+    </div>
+    <!--Seccion para editar informacion PERSONAL-->
+    <div id="personal" class="contenido activo">
+      <div class="card">
+        <h2>Información Personal</h2>
+        <p class="subtitulo">Actualiza tus datos básicos</p>
+
+        <!-- Fila 1 -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" placeholder="Ingresa tu nombre" />
+          </div>
+          <div class="form-group">
+            <label for="correo">Correo electrónico</label>
+            <input type="email" id="correo" placeholder="ejemplo@correo.com" />
+          </div>
+        </div>
+
+        <!-- Fila 2 -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="telefono">Teléfono</label>
+            <input type="tel" id="telefono" placeholder="+56 9 1234 5678" />
+          </div>
+          <div class="form-group">
+            <label for="nacimiento">Fecha de nacimiento</label>
+            <input type="date" id="nacimiento" />
+          </div>
+        </div>
+
+        <!-- Fila 3-->
+        <div class="form-group">
+          <label for="bio">Biografía</label>
+          <textarea id="bio" placeholder="Escribe algo sobre ti..."></textarea>
+        </div>
+
+        <!-- Botones -->
+        <div class="botones">
+          <button class="btn-secundario">Cancelar</button>
+          <button class="btn-primario boton-guardar">Guardar</button>
+        </div>
+      </div>
+    </div>
+
+    <!--Seccion para editar configuracion de COMPRAS-->
+    <div class="contenido" id="compras">
+      <section class="card">
+        <h2 class="titulo-seccion">Historial de Compras</h2>
+        <p>revisa y administra tus compras anteriores</p>
+
+        <form>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="pago">Método de Pago Preferido</label>
+              <select id="pago">
+                <option>Tarjeta de Crédito</option>
+                <option>PayPal</option>
+                <option>Transferencia Bancaria</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="presupuesto">Rango de Presupuesto</label>
+              <select id="presupuesto">
+                <option>€100 - €500</option>
+                <option>€500 - €1000</option>
+                <option>€1000 - €5000</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="direccion">Dirección de Envío</label>
+            <textarea
+              id="direccion"
+              rows="3"
+              placeholder="Calle Principal 123, Madrid, España"
+            ></textarea>
+          </div>
+        </form>
+      </section>
+    </div>
+
+    <!--Seccion para editar PREFERENCIAS-->
+    <section class="contenido" id="preferencias">
+      <div class="card">
+        <h2>Preferencias Generales</h2>
+        <p class="subtitulo">Personaliza tu experiencia en la plataforma</p>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="idioma">Idioma</label>
+            <select id="idioma">
+              <option>Español</option>
+              <option>Inglés</option>
+              <option>Francés</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="moneda">Moneda</label>
+            <select id="moneda">
+              <option>EUR (€)</option>
+              <option>USD ($)</option>
+              <option>CLP ($)</option>
+            </select>
+          </div>
+        </div>
+
+        <hr />
+
+        <h2>Notificaciones</h2>
+
+        <div class="notificacion">
+          <div>
+            <strong>Notificaciones Push</strong>
+            <p>Recibir notificaciones sobre pedidos y ofertas</p>
+          </div>
+          <label class="switch">
+            <input type="checkbox" checked />
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="notificacion">
+          <div>
+            <strong>Newsletter</strong>
+            <p>Recibir noticias y promociones por email</p>
+          </div>
+          <label class="switch">
+            <input type="checkbox" />
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+    </section>
+
+    <!--Seccion para editar configuracion de SEGURIDAD-->
+    <section class="contenido" id="seguridad">
+      <div class="card">
+        <h2>Seguridad de la Cuenta</h2>
+        <p class="subtitulo">Gestiona la seguridad y privacidad de tu cuenta</p>
+
+        <div class="opcion">
+          <div>
+            <strong>🔒 Autenticación de Dos Factores</strong>
+            <p>Activada</p>
+          </div>
+          <button class="btn-secundario">Configurar</button>
+        </div>
+
+        <div class="opcion">
+          <div>
+            <strong>💳 Métodos de Pago</strong>
+            <p>2 tarjetas guardadas</p>
+          </div>
+          <button class="btn-secundario">Gestionar</button>
+        </div>
+
+        <hr />
+
+        <h2>Cambiar Contraseña</h2>
+
+        <form>
+          <div class="form-group">
+            <label for="actual">Contraseña Actual</label>
+            <input type="password" id="actual" />
+          </div>
+
+          <div class="form-group">
+            <label for="nueva">Nueva Contraseña</label>
+            <input type="password" id="nueva" />
+          </div>
+
+          <div class="form-group">
+            <label for="confirmar">Confirmar Nueva Contraseña</label>
+            <input type="password" id="confirmar" />
+          </div>
+
+          <button type="submit" class="btn-primario">
+            Actualizar Contraseña
+          </button>
+        </form>
+      </div>
+    </section>
+  </body>
+</html>
