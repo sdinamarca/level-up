@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Carro de Compras</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #000000;
+      font-family: 'Roboto', sans-serif;
+      color: #FFFFFF;
+    }
+    h1, h2, h3, h4, h5 {
+      font-family: 'Orbitron', sans-serif;
+      color: #1E90FF;
+    }
+    .text-secondary {
+      color: #D3D3D3 !important;
+    }
+
+    .btn-primary {
+      background-color: #1E90FF;
+      border: none;
+    }
+    .btn-primary:hover {
+      background-color: #1565c0;
+    }
+
+    .btn-success {
+      background-color: #39FF14;
+      border: none;
+      color: #000000;
+    }
+    .btn-success:hover {
+      background-color: #28cc0f;
+      color: #000000;
+    }
+
+    .btn-danger {
+      background-color: #FF3131;
+      border: none;
+    }
+    .btn-danger:hover {
+      background-color: #cc0000;
+    }
+
+    .card {
+      background-color: #111111;
+      border: 1px solid #1E90FF;
+      color: #FFFFFF;
+    }
+
+    .card-title {
+      font-family: 'Orbitron', sans-serif;
+      color: #1E90FF;
+    }
+
+    .card-text {
+      color: #D3D3D3;
+    }
+
+    .table {
+      background-color: #111111;
+      color: #FFFFFF;
+    }
+    .table th {
+      background-color: #1E90FF;
+      color: #FFFFFF;
+    }
+    .table td {
+      color: #D3D3D3;
+    }
+
+    #total {
+      color: #39FF14;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container py-4">
+  <h1 class="text-center mb-4">LEVEL-UP</h1>
+
+  <div class="row g-3">
+    <div class="col-md-4">
+      <div class="card shadow-sm">
+        <img src="img/ps5pro.jpg" class="card-img-top" alt="PlayStation 5 pro">
+        <div class="card-body text-center">
+          <h5 class="card-title">PlayStation 5 pro</h5>
+          <p class="card-text">Precio: $549.990 CLP</p>
+          <button class="btn btn-primary" onclick="agregarAlCarrito('PlayStation 5 pro', 549990)">Agregar al carrito</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card shadow-sm">
+         <img src="img/controlps5.jpg" class="card-img-top" alt="Control PS5 DualSense Negro">
+        <div class="card-body text-center">
+          <h5 class="card-title">Control PS5 DualSense Negro</h5>
+          <p class="card-text">Precio: $69.990 CLP</p>
+          <button class="btn btn-primary" onclick="agregarAlCarrito('Control PS5 DualSense Negro', 69990)">Agregar al carrito</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card shadow-sm">
+         <img src="img/auricularesps5.jpg" class="card-img-top" alt="Audífonos Inalámbricos Sony Pulse Elite Playstation 5">
+        <div class="card-body text-center">
+          <h5 class="card-title">Audífonos Inalámbricos Sony Pulse Elite Playstation 5</h5>
+          <p class="card-text">Precio: $159.990 CLP</p>
+          <button class="btn btn-primary" onclick="agregarAlCarrito('Audífonos Inalámbricos Sony Pulse Elite Playstation 5', 159990)">Agregar al carrito</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card mt-5 shadow">
+    <div class="card-body">
+      <h2 class="card-title">Carrito de Compras</h2>
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped align-middle">
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th>Precio</th>
+              <th>Cantidad</th>
+              <th>Subtotal</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="tablaCarrito"></tbody>
+        </table>
+      </div>
+      <h3 id="total" class="text-end mt-3">Total: $0</h3>
+      <div class="text-end">
+        <button class="btn btn-danger me-2" onclick="vaciarCarrito()">Vaciar carrito</button>
+        <button class="btn btn-success">Finalizar compra</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  let carrito = [];
+
+  function agregarAlCarrito(nombre, precio) {
+    let producto = carrito.find(p => p.nombre === nombre);
+    if (producto) {
+      producto.cantidad++;
+    } else {
+      carrito.push({ nombre, precio, cantidad: 1 });
+    }
+    actualizarCarrito();
+  }
+
+  function eliminarDelCarrito(nombre) {
+    carrito = carrito.filter(p => p.nombre !== nombre);
+    actualizarCarrito();
+  }
+
+  function modificarCantidad(nombre, cantidad) {
+    let producto = carrito.find(p => p.nombre === nombre);
+    if (producto) {
+      producto.cantidad = parseInt(cantidad);
+      if (producto.cantidad <= 0) eliminarDelCarrito(nombre);
+    }
+    actualizarCarrito();
+  }
+
+  function vaciarCarrito() {
+    carrito = [];
+    actualizarCarrito();
+  }
+
+  function actualizarCarrito() {
+    let tbody = document.getElementById("tablaCarrito");
+    tbody.innerHTML = "";
+    let total = 0;
+
+    carrito.forEach(p => {
+      let subtotal = p.precio * p.cantidad;
+      total += subtotal;
+
+      let fila = `
+        <tr>
+          <td>${p.nombre}</td>
+          <td>$${p.precio.toLocaleString("es-CL")}</td>
+          <td>
+            <input type="number" value="${p.cantidad}" min="1" class="form-control w-50 mx-auto"
+              onchange="modificarCantidad('${p.nombre}', this.value)">
+          </td>
+          <td>$${subtotal.toLocaleString("es-CL")}</td>
+          <td>
+            <button class="btn btn-sm btn-danger" onclick="eliminarDelCarrito('${p.nombre}')">Eliminar</button>
+          </td>
+        </tr>
+      `;
+      tbody.innerHTML += fila;
+    });
+
+    document.getElementById("total").innerText = "Total: $" + total.toLocaleString("es-CL");
+  }
+</script>
+
+</body>
+</html>
+

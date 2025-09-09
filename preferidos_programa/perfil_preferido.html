@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Perfil LevelUp</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #000;
+      color: #FFF;
+      font-family: 'Roboto', sans-serif;
+    }
+    h1, h2, h3, h4, h5 {
+      font-family: 'Orbitron', sans-serif;
+      color: #1E90FF;
+    }
+    .card {
+      background-color: #111;
+      border: 1px solid #1E90FF;
+    }
+    .btn-primary {
+      background-color: #1E90FF;
+      border: none;
+    }
+    .btn-primary:hover {
+      background-color: #1565c0;
+    }
+    .btn-success {
+      background-color: #39FF14;
+      border: none;
+      color: #000;
+    }
+    .btn-success:hover {
+      background-color: #28c91f;
+    }
+    .historial, .canjes {
+      margin-top: 20px;
+    }
+    .table th, .table td {
+      color: #FFF;
+    }
+    .card-img-top {
+      height: 150px;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container py-4">
+  <h1 class="text-center mb-4">Perfil LevelUp</h1>
+
+  <div class="card p-4 text-center mb-4">
+    <h2>Bienvenido, <span id="nombreUsuario">Usuario</span></h2>
+    <p>Tus puntos actuales: <strong id="puntosUsuario">0 LevelUp</strong></p>
+    <p>Nivel actual: <strong id="nivelUsuario">1</strong></p>
+  </div>
+
+  <div class="historial card p-3 mb-4">
+    <h3>Historial de Compras</h3>
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+          <tr>
+            <th>Producto</th>
+            <th>Puntos obtenidos</th>
+            <th>Fecha</th>
+          </tr>
+        </thead>
+        <tbody id="historialCompras"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="canjes card p-3">
+    <h3>Canjear Puntos</h3>
+
+    <div class="mb-4">
+      <h5>Descuentos</h5>
+      <div class="row g-3" id="descuentosCanjeables"></div>
+    </div>
+
+    <div>
+      <h5>Productos</h5>
+      <div class="row g-3" id="productosCanjeables"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  let usuarioActual = JSON.parse(localStorage.getItem("usuarios"))?.[0] || {
+    nombre: "UsuarioDemo",
+    puntos: 3500,
+    historialCompras: [
+      {producto: "PS5 Pro", puntosGanados: 1000, fecha: "2025-09-05"},
+      {producto: "Control PS5", puntosGanados: 500, fecha: "2025-09-01"}
+    ]
+  };
+
+  document.getElementById("nombreUsuario").textContent = usuarioActual.nombre;
+  document.getElementById("puntosUsuario").textContent = usuarioActual.puntos + " LevelUp";
+  document.getElementById("nivelUsuario").textContent = Math.floor(usuarioActual.puntos / 500) + 1;
+
+  let historialHTML = "";
+  usuarioActual.historialCompras.forEach(compra => {
+    historialHTML += `
+      <tr>
+        <td>${compra.producto}</td>
+        <td>${compra.puntosGanados}</td>
+        <td>${compra.fecha}</td>
+      </tr>
+    `;
+  });
+  document.getElementById("historialCompras").innerHTML = historialHTML;
+
+  const descuentos = [
+    {nombre: "Descuento $5.000 CLP", puntos: 500}
+  ];
+  const productos = [
+    {nombre: "Juego de mesa: Catan", puntos: 2500, precio: "$30.000 CLP", img: "img2/catan.jpg"},
+    {nombre: "Producto de la tienda", puntos: 3500, precio: "$97.990 CLP", img: "img2/mouse.jpg"},
+    {nombre: "Producto Exclusivo de la tienda", puntos: 5000, precio: "$459.990 CLP", img: "img2/ps4.jpg"}
+  ];
+
+  let descuentosHTML = "";
+  descuentos.forEach(desc => {
+    descuentosHTML += `
+      <div class="col-md-4">
+        <div class="card p-3 text-center" style="border:1px solid #39FF14;">
+          <p>${desc.nombre}</p>
+          <button class="btn btn-success" onclick="canjearProducto(${desc.puntos}, '${desc.nombre}')">Canjear por ${desc.puntos} puntos</button>
+        </div>
+      </div>
+    `;
+  });
+  document.getElementById("descuentosCanjeables").innerHTML = descuentosHTML;
+
+  let productosHTML = "";
+  productos.forEach(prod => {
+    productosHTML += `
+      <div class="col-md-4">
+        <div class="card p-3 text-center" style="border:1px solid #39FF14;">
+          <img src="${prod.img}" class="card-img-top mb-2" alt="${prod.nombre}">
+          <p><strong>${prod.nombre}</strong></p>
+          <p>Precio referencia: ${prod.precio}</p>
+          <button class="btn btn-success" onclick="canjearProducto(${prod.puntos}, '${prod.nombre}')">Canjear por ${prod.puntos} puntos</button>
+        </div>
+      </div>
+    `;
+  });
+  document.getElementById("productosCanjeables").innerHTML = productosHTML;
+  
+  function canjearProducto(puntos, nombreProducto){
+    if(usuarioActual.puntos >= puntos){
+      usuarioActual.puntos -= puntos;
+      localStorage.setItem("usuarios", JSON.stringify([usuarioActual]));
+      document.getElementById("puntosUsuario").textContent = usuarioActual.puntos + " LevelUp";
+      alert(`¡Canjeaste: ${nombreProducto}!`);
+    } else {
+      alert("No tienes suficientes puntos para canjear este producto.");
+    }
+  }
+</script>
+
+</body>
+</html>
