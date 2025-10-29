@@ -12,7 +12,11 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:jasmine": "jasmine",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "jasmine": "^4.5.0"
   },
   "browserslist": {
     "production": [
