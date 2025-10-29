@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Carro de Compras - copia</title>
+  </head>
+  <body>
+    <!-- Copia simplificada del carro de compras para visualización en React -->
+    <div class="container py-4">
+      <h1 class="text-center mb-4">LEVEL-UP</h1>
+      <div class="row g-3">
+        <div class="col-md-4">
+          <div class="card shadow-sm">
+            <div class="card-body text-center">
+              <h5 class="card-title">PlayStation 5 pro</h5>
+              <p class="card-text">Precio: $549.990 CLP</p>
+              <button class="btn btn-primary">Agregar al carrito</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card mt-5 shadow">
+        <div class="card-body">
+          <h2 class="card-title">Carrito de Compras</h2>
+          <div class="table-responsive">
+            <table class="table table-bordered table-striped align-middle">
+              <thead>
+                <tr>
+                  <th>Producto</th>
+                  <th>Precio</th>
+                  <th>Cantidad</th>
+                  <th>Subtotal</th>
+                </tr>
+              </thead>
+              <tbody id="tablaCarrito"></tbody>
+            </table>
+          </div>
+          <h3 id="total" class="text-end mt-3">Total: $0</h3>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

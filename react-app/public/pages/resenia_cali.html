@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Reseñas (copia)</title>
+  </head>
+  <body>
+    <div class="container py-4">
+      <h1 class="text-center mb-4">Reseñas</h1>
+      <div id="reseñasExistentes" class="mb-4"></div>
+      <div class="card p-3">
+        <h3>Deja tu reseña</h3>
+        <textarea
+          id="comentarioReseña"
+          class="form-control mb-2"
+          placeholder="Escribe tu reseña"
+        ></textarea>
+        <label for="estrellasReseña">Calificación:</label>
+        <select
+          id="estrellasReseña"
+          class="form-select mb-2"
+          style="width: 100px"
+        >
+          <option value="1">1 ⭐</option>
+          <option value="2">2 ⭐</option>
+          <option value="3">3 ⭐</option>
+          <option value="4">4 ⭐</option>
+          <option value="5" selected>5 ⭐</option>
+        </select>
+        <button class="btn btn-primary" onclick="agregarReseña()">
+          Agregar Reseña
+        </button>
+      </div>
+    </div>
+    <script>
+      let reseñas = [];
+      function mostrarReseñas() {
+        const div = document.getElementById("reseñasExistentes");
+        div.innerHTML = reseñas
+          .map(
+            (r) =>
+              `<div class="reseña-card"><div><strong>${
+                r.usuario
+              }</strong> - ${"⭐".repeat(r.estrellas)}<p>${
+                r.comentario
+              }</p></div></div>`
+          )
+          .join("");
+      }
+      function agregarReseña() {
+        const comentario = document.getElementById("comentarioReseña").value;
+        const estrellas = parseInt(
+          document.getElementById("estrellasReseña").value
+        );
+        if (!comentario) return alert("Escribe algo");
+        reseñas.unshift({ usuario: "UsuarioReact", estrellas, comentario });
+        mostrarReseñas();
+        document.getElementById("comentarioReseña").value = "";
+        document.getElementById("estrellasReseña").value = "5";
+      }
+    </script>
+  </body>
+</html>
